@@ -10,6 +10,11 @@ import { observe } from './observe.js';
 
 class MVVM {
   constructor(options) {
+    const a = new Map();
+    const b = {key: 'b'};
+    const c = {key: 'c'};
+
+    let arr = [1, 3];
     this.$options = options;
     let data = this._data = this.$options.data;
     // 数据代理
