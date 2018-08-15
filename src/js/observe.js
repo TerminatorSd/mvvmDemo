@@ -40,7 +40,7 @@ class Observer {
       enumerable: true,
       configurable: false,
       get: () => {
-        // 由于需要在闭包内添加watcher，所以通过Dep定义一个全局target属性，暂存watcher, 添加完移除
+        // 将Dep.target 指向的Watcher 实例添加到dep 的订阅列表中
         if (Dep.target) {
           dep.depend();
         }

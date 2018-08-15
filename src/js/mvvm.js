@@ -10,11 +10,6 @@ import { observe } from './observe.js';
 
 class MVVM {
   constructor(options) {
-    const a = new Map();
-    const b = {key: 'b'};
-    const c = {key: 'c'};
-
-    let arr = [1, 3];
     this.$options = options;
     let data = this._data = this.$options.data;
     // 数据代理
@@ -22,6 +17,7 @@ class MVVM {
     Object.keys(data).forEach((key) => {
       this._proxyData(key);
     });
+    // 对data 中的所有变量进行劫持
     observe(data, this);
     this.$compile = new Compiler(options.el || document.body, this);
   }

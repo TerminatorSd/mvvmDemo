@@ -14,9 +14,7 @@ class Compiler {
     this.$el = this.isElementNode(el) ? el : document.querySelector(el);
 
     if (this.$el) {
-      // console.log(this.$el);
       this.$fragment = this.node2Fragment(this.$el);
-      // console.log(this.$fragment);
       this.init();
       this.$el.appendChild(this.$fragment);
     }
@@ -40,8 +38,6 @@ class Compiler {
   compileElement(el) {
     let childNodes = el.childNodes;
     let reg = /\{\{(.*)\}\}/;
-    // console.log(childNodes);
-    // [].slice.call(childNodes).forEach((node) => {
     Array.from(childNodes).forEach((node) => {
       let text = node.textContent;
       // 按元素节点方式编译
@@ -60,7 +56,6 @@ class Compiler {
 
   compile(node) {
     let nodeAttrs = node.attributes;
-    // [].slice.call(nodeAttrs).forEach((attr) => {
     Array.from(nodeAttrs).forEach((attr) => {
       // 规定：指令以 v-xxx 命名
       // 如 <span v-text="content"></span> 中指令为 v-text
@@ -142,7 +137,7 @@ const compileUtil = {
     });
   },
   _getVMVal: function(vm, exp) {
-    // 这里为啥要这么写？？？
+    // 假设一个变量是a.b.c.d，当前操作可以保证取到最终的d
     let val = vm;
     exp = exp.split('.');
     exp.forEach((k) => {

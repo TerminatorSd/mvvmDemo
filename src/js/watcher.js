@@ -9,8 +9,8 @@
 import Dep from './dep.js';
 
 class Watcher {
+  // expOrFn 是我们通过指令绑定的变量或者函数名
   constructor(vm, expOrFn, cb) {
-    // console.log(expOrFn);
     this.cb = cb;
     this.vm = vm;
     this.expOrFn = expOrFn;
@@ -53,12 +53,11 @@ class Watcher {
     let oldVal = this.value;
     if (value !== oldVal) {
       this.value = value;
-      // console.log('36', this.cb);
       this.cb.call(this.vm, value, oldVal);
     }
   }
 
-  // 这个函数到底是把什么添加到什么里面去
+  // 将当前Watcher 实例添加到dep 中去
   addDep(dep) {
     if (!this.depIds.hasOwnProperty(dep.id)) {
       dep.addSub(this);
@@ -67,7 +66,7 @@ class Watcher {
   }
 
   get() {
-    // 为什么要设置target 的值
+    // 设置当前实例为Dep.target
     Dep.target = this;
     // 为啥传两个值？
     // console.log('51', this.getter);
@@ -77,8 +76,8 @@ class Watcher {
     return value;
   }
 
+  // 这个暂时用不到
   parseGetter(exp) {
-    // 这个正则是什么意思？
     if (/[^\w.$]/.test(exp)) {
       return; 
     }

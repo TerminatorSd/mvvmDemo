@@ -32,7 +32,7 @@ class Dep {
     });
   }
 
-  // 源头在这里，理清楚主线是怎么发生的！
+  // 将当前Dep.target 指向的Watcher 实例添加到当前Dep 的实例中
   depend() {
     Dep.target.addDep(this);
   }
